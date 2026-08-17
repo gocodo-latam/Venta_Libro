@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gracias por tu compra</title>
+<style>
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #faf8f5;
+    color: #2a2622;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .card {
+    max-width: 480px;
+    background: #fff;
+    border: 1px solid #e6ddd2;
+    border-radius: 14px;
+    padding: 32px;
+    text-align: center;
+  }
+  h1 { margin-top: 0; font-size: 1.4rem; }
+  p { color: #6b645c; }
+  .order-id {
+    font-family: monospace;
+    background: #f6f1ea;
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>¡Gracias por tu preventa! 🎉</h1>
+    <p>Tu pedido quedó registrado. Te llegará un correo con la confirmación una vez que se valide el pago.</p>
+    <p>Si elegiste retiro, te contactaremos para coordinar el día y la hora.</p>
+    <p id="orderIdBox"></p>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('orderId');
+    if (orderId) {
+      document.getElementById('orderIdBox').innerHTML =
+        'N° de pedido: <span class="order-id">' + orderId + '</span>';
+    }
+  </script>
+</body>
+</html>
