@@ -27,15 +27,8 @@ module.exports = {
       id: 'cercanos',
       label: 'Familiares/amigos — Retiro en domicilio del autor',
       details:
-        'Retiro directo conmigo. Dirección: Laura de Noves 344, Las Condes. ' +
-        'Una vez confirmado el pago te contactaré por WhatsApp/email para coordinar el horario.'
-    },
-    {
-      id: 'iglesia',
-      label: 'Comunidad religiosa — Retiro a la salida de la iglesia',
-      details:
-        '[Nombre de la iglesia], [dirección]. Retiro los domingos a la salida de la misa de [hora]. ' +
-        'Si no puedes ese día, escríbeme para coordinar otra alternativa.'
+        'Retiro directo con el autor. Dirección de retiro en Las Condes. ' +
+        'Una vez confirmado el pago e impresos los libros te contactaré por WhatsApp/email para coordinar la dirección y el horario.'
     }
   ],
 
