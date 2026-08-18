@@ -44,6 +44,6 @@ module.exports = {
     apiUrlProd: 'https://www.flow.cl/api',
     // Cambia a 'prod' SOLO cuando hayas probado todo el flujo en sandbox
     // y tengas tus credenciales reales (de producción) de Flow.
-    environment: 'sandbox'
+    environment: 'prod'
   }
 };
