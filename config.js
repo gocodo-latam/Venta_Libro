@@ -17,7 +17,7 @@ module.exports = {
   // vacío, esa sección simplemente no se muestra.
   landing: {
     badge: 'Preventa',
-    subtitle: 'Una tragicomedia metafísica entre la ciencia, la filosofía y el amor.',
+    subtitle: 'Una novela con humor sobre la infancia, el amor, el fracaso y las grandes preguntas de la vida.',
     author: 'Gonzalo Cornejo Donoso',
     cover: '', // Ej: '/portada.jpg' (sube la imagen a /public). Vacío = portada tipográfica
 
@@ -27,7 +27,7 @@ module.exports = {
     synopsis: [
       'Gonzalo nace el día en que Italia le gana a Brasil en el Mundial de España 82. Desde muy chico entiende que la belleza no siempre gana y que el mundo suele preferir lo que funciona.',
       'Entre la infancia, el colegio, la familia, el trabajo y la ciudad, empieza a sospechar de las sombras: lo que no se ve, lo que no entra en la explicación oficial. Su manera de enfrentarlas es discutir con la materia.',
-      'Es una novela sobre vergüenza, amor, fracaso, salud mental, fe y ciencia, contada con humor y con una pregunta de fondo: qué pasa cuando una explicación brillante ocupa el lugar de la verdad.'
+      'Es una novela sobre vergüenza, amor, fracaso, salud mental, fe y ciencia, contada con humor y con una pregunta que no lo suelta: ¿y si lo que nos explicaron no fuera toda la historia?'
     ],
 
     quote: 'A veces el precio no baja porque el cliente sea racional.',
@@ -36,7 +36,7 @@ module.exports = {
     // "Lo que vas a encontrar": se muestra como tarjetas
     themes: [
       { icon: '🌓', title: 'Luz y sombra', text: 'Una mirada distinta sobre lo que vemos y lo que se nos escapa.' },
-      { icon: '😅', title: 'Humor con fondo', text: 'Tragicomedia: te ríes, y de pronto te quedas pensando.' },
+      { icon: '😅', title: 'Humor con fondo', text: 'Te ríes, y de pronto te quedas pensando.' },
       { icon: '🔬', title: 'Ciencia y fe', text: 'Preguntas grandes, contadas desde una vida concreta.' },
       { icon: '❤️', title: 'Amor y fracaso', text: 'Infancia, vergüenza, salud mental y redención.' }
     ],
