@@ -13,6 +13,20 @@ module.exports = {
     currency: 'CLP'
   },
 
+  // Textos de la página de venta. Todo es opcional: si dejas un campo
+  // vacío, esa sección simplemente no se muestra.
+  landing: {
+    subtitle: '',            // Ej: 'Una novela sobre ...' (una línea bajo el título)
+    author: '',              // Ej: 'Nombre Apellido'
+    badge: 'Preventa',       // Etiqueta sobre el título
+    cover: '',               // Ej: '/portada.jpg' (sube la imagen a /public). Vacío = portada tipográfica
+    synopsis: [],            // Lista de párrafos. Ej: ['Primer párrafo...', 'Segundo párrafo...']
+    quote: '',               // Frase destacada o reseña breve
+    quoteBy: '',             // Autor de la frase
+    authorBio: '',           // Breve bio del autor
+    deliveryNote: ''         // Ej: 'Fecha estimada de entrega: marzo 2027'
+  },
+
   shipping: {
     // Costo fijo de despacho a domicilio. Ponlo en 0 si el despacho es gratis.
     despachoCost: 4900
