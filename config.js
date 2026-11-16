@@ -13,6 +13,96 @@ module.exports = {
     currency: 'CLP'
   },
 
+  // Textos de la página de venta. Todo es opcional: si dejas un campo
+  // vacío, esa sección simplemente no se muestra.
+  landing: {
+    badge: 'Preventa',
+    subtitle: 'Una novela con humor sobre la infancia, el amor, el fracaso y las grandes preguntas de la vida.',
+    author: 'Gonzalo Cornejo Donoso',
+    cover: '/portada.jpg', // Imagen en /public. Vacío = portada tipográfica
+
+    // Gancho corto que aparece justo antes de la compra
+    hook: '¿Y si el problema no fuera lo que ves, sino lo que quedó fuera de la muestra?',
+
+    synopsis: [
+      'Gonzalo nace el día en que Italia le gana a Brasil en el Mundial de España 82. Desde muy chico entiende que la belleza no siempre gana y que el mundo suele preferir lo que funciona.',
+      'Entre la infancia, el colegio, la familia, el trabajo y la ciudad, empieza a sospechar de las sombras: lo que no se ve, lo que no entra en la explicación oficial. Su manera de enfrentarlas es discutir con la materia.',
+      'Es una novela sobre vergüenza, amor, fracaso, salud mental, fe y ciencia, contada con humor y con una pregunta que no lo suelta: ¿y si lo que nos explicaron no fuera toda la historia?'
+    ],
+
+    quote: 'A veces el precio no baja porque el cliente sea racional.',
+    quoteBy: 'Un mensaje del libro',
+
+    // "Lo que vas a encontrar": se muestra como tarjetas
+    themes: [
+      { icon: '🌓', title: 'Luz y sombra', text: 'Una mirada distinta sobre lo que vemos y lo que se nos escapa.' },
+      { icon: '😅', title: 'Humor con fondo', text: 'Te ríes, y de pronto te quedas pensando.' },
+      { icon: '🔬', title: 'Ciencia y fe', text: 'Preguntas grandes, contadas desde una vida concreta.' },
+      { icon: '❤️', title: 'Amor y fracaso', text: 'Infancia, vergüenza, salud mental y redención.' }
+    ],
+
+    // "Es para ti si..."
+    audience: [
+      'Te gustan las novelas contemporáneas con humor y preguntas grandes.',
+      'Trabajas con datos, tecnología o sistemas y sospechas que algo queda fuera de la muestra.',
+      'Creciste en los 80 y 90 en Chile y te gusta reconocer ese mundo en una historia.',
+      'Buscas un regalo distinto para alguien que disfruta pensar.'
+    ],
+
+    // Reseñas reales de lectores (déjalo vacío hasta tener; no inventar)
+    testimonials: [
+      {
+        stars: 5,
+        title: 'Divertido pero muy interesante',
+        text: 'Es una buena mezcla de una entretenida historia personal, con muchos insights cotidianos, con bastante humor, y todo alrededor de una teoría sorprendente y ambiciosa. Se lee muy fácil también, muy recomendado!',
+        by: 'JIPVI',
+        source: 'Compra verificada · Amazon'
+      },
+      {
+        stars: 5,
+        title: 'Inspirador y entretenido',
+        text: 'Un libro interesante, ágil, creativo, innovador, que sale desde el alma y con mucha honestidad. Es entretenido de leer y deja cosas en que pensar.',
+        by: 'Sebastian Sabat V.',
+        source: 'Compra verificada · Amazon'
+      },
+      {
+        stars: 5,
+        title: 'Interesante novela autobiográfica',
+        text: 'Este entretenido libro puede atraparte y hacer que tengas que leerlo de corrido. También me hicieron click algunas ideas que sin duda pueden aplicarse a los negocios. Recomendado 100%',
+        by: 'Rodrigo',
+        source: 'Compra verificada · Amazon'
+      },
+      {
+        stars: 5,
+        title: 'Vulnerablemente brillante',
+        text: 'Un libro que simplemente te atrapa por su originalidad. Gonzalo se destapa y se muestra vulnerable, generando un sentimiento de complicidad con el lector.',
+        by: 'Lector',
+        source: 'Reseña en Amazon'
+      },
+      {
+        stars: 5,
+        title: '',
+        text: 'Muy buen libro, honesto y bien contado, eso lo cambia todo.',
+        by: 'Lector',
+        source: 'Reseña en Amazon'
+      },
+      {
+        stars: 4,
+        title: 'El libro me atrapó desde la primera línea',
+        text: 'Gonzalo muestra gran fluidez y claridad para construir nítidamente el personaje, su visión de mundo, sus matices y sus grietas en las etapas de niñez y universitaria.',
+        by: 'José Miguel Friz',
+        source: 'Compra verificada · Amazon'
+      }
+    ],
+
+    authorBio:
+      'Nació en Santiago de Chile en 1982. Es ingeniero civil industrial de la Pontificia Universidad Católica de Chile y ha trabajado en transporte, datos, pricing, procesos, innovación, tecnología e inteligencia artificial. Su mirada, entre sistemas, mercados y sombras, atraviesa esta novela.',
+
+    deliveryNote: '',        // Ej: 'Fecha estimada de entrega: marzo 2027'
+    whatsapp: '',            // Ej: '56912345678' (con código de país, sin + ni espacios)
+    whatsappText: 'Hola, tengo una consulta sobre la preventa del libro'
+  },
+
   shipping: {
     // Costo fijo de despacho a domicilio. Ponlo en 0 si el despacho es gratis.
     despachoCost: 4900
