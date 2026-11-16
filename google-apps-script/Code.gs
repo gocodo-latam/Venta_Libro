@@ -23,6 +23,17 @@ const SHEET_NAME = 'Pedidos';
 const TOKEN = 'CAMBIA_ESTE_TOKEN_POR_UNO_SECRETO';
 
 function doPost(e) {
+  // Evita que dos pedidos simultáneos se pisen al escribir en la planilla
+  const lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    return procesar_(e);
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function procesar_(e) {
   const params = e.parameter;
 
   if (params.token !== TOKEN) {

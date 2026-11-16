@@ -65,10 +65,11 @@ module.exports = async (req, res) => {
       return;
     }
 
-    // 1) Guardar el pedido como "pendiente" en la planilla (si está configurado)
-    if (process.env.SHEET_WEBAPP_URL) {
-      try {
-        await fetch(process.env.SHEET_WEBAPP_URL, {
+    // 1) Guardar el pedido como "pendiente" en la planilla (si está configurado).
+    //    Se hace EN PARALELO con la creación del pago: Google Apps Script puede
+    //    tardar varios segundos y antes el comprador esperaba ese tiempo de más.
+    const guardarEnPlanilla = process.env.SHEET_WEBAPP_URL
+      ? fetch(process.env.SHEET_WEBAPP_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams({
@@ -87,28 +88,32 @@ module.exports = async (req, res) => {
               cantidad: qty,
               total
             })
-          })
-        });
-      } catch (e) {
-        console.error('No se pudo guardar en la planilla:', e.message);
-        // No bloqueamos el pago por esto, pero queda en los logs.
-      }
-    }
+          }),
+          signal: AbortSignal.timeout(10000)
+        }).catch((e) => {
+          // No bloqueamos el pago por esto, pero queda en los logs.
+          console.error('No se pudo guardar en la planilla:', e.message);
+        })
+      : Promise.resolve();
 
     // 2) Crear el pago en Flow
-    const flowResp = await flowRequest('/payment/create', {
+    //    urlReturn apunta a /api/retorno (no a un HTML): Flow devuelve al comprador
+    //    con POST y un HTML estático responde 405.
+    const flowPromise = flowRequest('/payment/create', {
       commerceOrder: orderId,
       subject: `Preventa "${config.book.title}" x${qty}`,
       currency: config.book.currency,
       amount: total,
       email,
       urlConfirmation: `${siteUrl}/api/confirmacion`,
-      urlReturn: `${siteUrl}/gracias.html?orderId=${orderId}`
+      urlReturn: `${siteUrl}/api/retorno`
     });
+
+    const [flowResp] = await Promise.all([flowPromise, guardarEnPlanilla]);
 
     res.status(200).json({ url: flowResp.url, token: flowResp.token, orderId, total });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error al crear el pedido', detail: err.message });
+    res.status(500).json({ error: 'No pudimos iniciar el pago. Intenta de nuevo en unos segundos.' });
   }
 };

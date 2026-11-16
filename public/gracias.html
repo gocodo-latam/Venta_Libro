@@ -50,21 +50,57 @@
 </head>
 <body>
   <div class="card">
-    <div class="check" aria-hidden="true">✓</div>
-    <h1>¡Gracias por tu preventa!</h1>
-    <p>Tu pedido quedó registrado. Te llegará un correo con la confirmación una vez que se valide el pago.</p>
-    <p>Si elegiste retiro, te contactaremos por WhatsApp o correo para coordinar el día y la hora.</p>
-    <div class="order-box hidden-box" id="orderBox" hidden>
+    <div class="check" id="icon" aria-hidden="true">✓</div>
+    <h1 id="title">¡Gracias por tu preventa!</h1>
+    <p id="msg1">Tu pedido quedó registrado. Te llegará un correo con la confirmación una vez que se valide el pago.</p>
+    <p id="msg2">Si elegiste retiro, te contactaremos por WhatsApp o correo para coordinar el día y la hora.</p>
+    <div class="order-box" id="orderBox" hidden>
       N° de pedido
       <span class="order-id" id="orderId"></span>
     </div>
-    <a class="back" href="/">Volver al inicio</a>
+    <a class="back" id="backBtn" href="/">Volver al inicio</a>
   </div>
   <script>
-    const orderId = new URLSearchParams(window.location.search).get('orderId');
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('orderId');
+    const estado = params.get('estado') || 'pagado';
+    const $ = (id) => document.getElementById(id);
+
+    const textos = {
+      pagado: null, // texto por defecto del HTML
+      pendiente: {
+        icon: '⏳', title: 'Estamos validando tu pago',
+        m1: 'Tu pago aún está en proceso. No es necesario que vuelvas a pagar: cuando se confirme, tu pedido quedará registrado automáticamente.',
+        m2: 'Si en unos minutos no recibes el correo de Flow, escríbenos con tu N° de pedido.'
+      },
+      rechazado: {
+        icon: '!', title: 'No pudimos procesar tu pago',
+        m1: 'El pago fue rechazado y no se realizó ningún cobro. Puedes intentarlo de nuevo con la misma u otra tarjeta.',
+        m2: '', retry: true
+      },
+      anulado: {
+        icon: '!', title: 'El pago fue cancelado',
+        m1: 'Cancelaste el pago y no se realizó ningún cobro. Si quieres reservar tu ejemplar, puedes intentarlo de nuevo.',
+        m2: '', retry: true
+      },
+      desconocido: {
+        icon: 'i', title: 'Revisa tu correo',
+        m1: 'No pudimos confirmar el estado de tu pago desde aquí. Si el pago se realizó, recibirás un comprobante de Flow en tu correo y tu pedido quedará registrado.',
+        m2: 'Si tienes dudas, escríbenos con tu N° de pedido (si lo tienes).'
+      }
+    };
+    const t = textos[estado];
+    if (t) {
+      $('icon').textContent = t.icon;
+      $('title').textContent = t.title;
+      $('msg1').textContent = t.m1;
+      $('msg2').textContent = t.m2;
+      $('msg2').hidden = !t.m2;
+      if (t.retry) { $('backBtn').textContent = 'Intentar de nuevo'; $('backBtn').href = '/#comprar'; }
+    }
     if (orderId) {
-      document.getElementById('orderId').textContent = orderId;
-      document.getElementById('orderBox').hidden = false;
+      $('orderId').textContent = orderId;
+      $('orderBox').hidden = false;
     }
   </script>
 </body>
