@@ -50,7 +50,50 @@ module.exports = {
     ],
 
     // Reseñas reales de lectores (déjalo vacío hasta tener; no inventar)
-    testimonials: [], // Ej: [{ text: 'Me hizo reír y pensar.', by: 'Nombre, Ciudad' }]
+    testimonials: [
+      {
+        stars: 5,
+        title: 'Divertido pero muy interesante',
+        text: 'Es una buena mezcla de una entretenida historia personal, con muchos insights cotidianos, con bastante humor, y todo alrededor de una teoría sorprendente y ambiciosa. Se lee muy fácil también, muy recomendado!',
+        by: 'JIPVI',
+        source: 'Compra verificada · Amazon'
+      },
+      {
+        stars: 5,
+        title: 'Inspirador y entretenido',
+        text: 'Un libro interesante, ágil, creativo, innovador, que sale desde el alma y con mucha honestidad. Es entretenido de leer y deja cosas en que pensar.',
+        by: 'Sebastian Sabat V.',
+        source: 'Compra verificada · Amazon'
+      },
+      {
+        stars: 5,
+        title: 'Interesante novela autobiográfica',
+        text: 'Este entretenido libro puede atraparte y hacer que tengas que leerlo de corrido. También me hicieron click algunas ideas que sin duda pueden aplicarse a los negocios. Recomendado 100%',
+        by: 'Rodrigo',
+        source: 'Compra verificada · Amazon'
+      },
+      {
+        stars: 5,
+        title: 'Vulnerablemente brillante',
+        text: 'Un libro que simplemente te atrapa por su originalidad. Gonzalo se destapa y se muestra vulnerable, generando un sentimiento de complicidad con el lector.',
+        by: 'Lector',
+        source: 'Reseña en Amazon'
+      },
+      {
+        stars: 5,
+        title: '',
+        text: 'Muy buen libro, honesto y bien contado, eso lo cambia todo.',
+        by: 'Lector',
+        source: 'Reseña en Amazon'
+      },
+      {
+        stars: 4,
+        title: 'El libro me atrapó desde la primera línea',
+        text: 'Gonzalo muestra gran fluidez y claridad para construir nítidamente el personaje, su visión de mundo, sus matices y sus grietas en las etapas de niñez y universitaria.',
+        by: 'José Miguel Friz',
+        source: 'Compra verificada · Amazon'
+      }
+    ],
 
     authorBio:
       'Nació en Santiago de Chile en 1982. Es ingeniero civil industrial de la Pontificia Universidad Católica de Chile y ha trabajado en transporte, datos, pricing, procesos, innovación, tecnología e inteligencia artificial. Su mirada, entre sistemas, mercados y sombras, atraviesa esta novela.',
