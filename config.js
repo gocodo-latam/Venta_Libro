@@ -19,7 +19,7 @@ module.exports = {
     badge: 'Preventa',
     subtitle: 'Una novela con humor sobre la infancia, el amor, el fracaso y las grandes preguntas de la vida.',
     author: 'Gonzalo Cornejo Donoso',
-    cover: '', // Ej: '/portada.jpg' (sube la imagen a /public). Vacío = portada tipográfica
+    cover: '/portada.jpg', // Imagen en /public. Vacío = portada tipográfica
 
     // Gancho corto que aparece justo antes de la compra
     hook: '¿Y si el problema no fuera lo que ves, sino lo que quedó fuera de la muestra?',
