@@ -273,6 +273,33 @@
     .checkout-card { padding: 22px 18px; }
   }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .pay-btn { transition: none; } }
+
+  /* ---------- Extra: hook, themes, audience, testimonials, sticky ---------- */
+  .hook { font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 1.7rem); line-height: 1.35; text-align: center; font-style: italic; color: var(--accent-dark); margin: 0 auto 34px; max-width: 30em; }
+  .themes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .theme { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 22px 18px; }
+  .theme .ic { font-size: 1.5rem; margin-bottom: 8px; }
+  .theme h3 { margin: 0 0 6px; font-size: 1rem; }
+  .theme p { margin: 0; color: var(--muted); font-size: .9rem; }
+  .audience { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .audience li { background: var(--paper); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px 14px 48px; position: relative; }
+  .audience li::before { content: "✓"; position: absolute; left: 16px; top: 13px; width: 22px; height: 22px; border-radius: 50%; background: var(--dark); color: var(--gold); font-size: .8rem; display: grid; place-items: center; }
+  .testi { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .testi blockquote { margin: 0; background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 22px; font-family: var(--serif); font-size: 1.05rem; }
+  .testi cite { display: block; margin-top: 10px; font: .85rem var(--sans); color: var(--muted); font-style: normal; }
+  .share-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+  .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--ink); padding: 10px 18px; border-radius: 999px; font-size: .9rem; cursor: pointer; text-decoration: none; font-family: inherit; }
+  .btn-ghost:hover { border-color: var(--accent); }
+  .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: rgba(43,29,20,.97); color: #f6efe5; padding: 10px 16px; display: none; align-items: center; justify-content: space-between; gap: 12px; transform: translateY(100%); transition: transform .25s; }
+  .sticky-cta.on { transform: none; }
+  .sticky-cta .btn { padding: 11px 20px; }
+  .sticky-cta strong { font-family: var(--serif); font-size: 1.15rem; }
+  @media (max-width: 820px) {
+    .themes { grid-template-columns: 1fr 1fr; }
+    .sticky-cta { display: flex; }
+    body { padding-bottom: 64px; }
+  }
+  @media (max-width: 460px) { .themes { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -309,6 +336,33 @@
       </div>
     </section>
 
+    <!-- QUÉ VAS A ENCONTRAR -->
+    <section class="hidden" id="themesSection">
+      <div class="container">
+        <p class="eyebrow">Qué vas a encontrar</p>
+        <h2>Una novela que se lee fácil y se piensa difícil</h2>
+        <div class="themes" id="themes"></div>
+      </div>
+    </section>
+
+    <!-- PARA QUIÉN -->
+    <section class="alt hidden" id="audienceSection">
+      <div class="narrow">
+        <p class="eyebrow">Para quién es</p>
+        <h2>Es para ti si…</h2>
+        <ul class="audience" id="audience"></ul>
+      </div>
+    </section>
+
+    <!-- RESEÑAS -->
+    <section class="hidden" id="testiSection">
+      <div class="container">
+        <p class="eyebrow">Lo que dicen los lectores</p>
+        <h2>Primeras reseñas</h2>
+        <div class="testi" id="testi"></div>
+      </div>
+    </section>
+
     <!-- CÓMO FUNCIONA -->
     <section class="alt" id="how">
       <div class="container">
@@ -327,6 +381,7 @@
       <div class="narrow">
         <p class="eyebrow">Preventa</p>
         <h2>Reserva tu ejemplar</h2>
+        <p class="hook hidden" id="hook"></p>
 
         <div class="checkout-card">
           <div class="checkout-head">
@@ -403,6 +458,10 @@
             <p class="secure">🔒 Pago procesado de forma segura por Flow.cl. No almacenamos datos de tu tarjeta.</p>
           </form>
         </div>
+        <div class="share-row">
+          <button type="button" class="btn-ghost" id="shareBtn">Compartir este libro</button>
+          <a class="btn-ghost hidden" id="waBtn" target="_blank" rel="noopener">¿Dudas? Escríbeme por WhatsApp</a>
+        </div>
       </div>
     </section>
 
@@ -429,6 +488,11 @@
       </div>
     </section>
   </main>
+
+  <div class="sticky-cta" id="stickyCta" aria-hidden="true">
+    <span><strong id="stickyPrice">—</strong> <span style="color:#bfae98;font-size:.85rem">preventa</span></span>
+    <a href="#comprar" class="btn">Reservar</a>
+  </div>
 
   <footer>
     <strong id="footTitle"></strong>
@@ -503,6 +567,29 @@
     }
     show($('quoteBox'), !!L.quote);
     show($('aboutSection'), paragraphs.length > 0 || !!L.quote);
+
+    const themes = Array.isArray(L.themes) ? L.themes : [];
+    $('themes').innerHTML = themes.map((t) =>
+      '<div class="theme"><div class="ic" aria-hidden="true">' + esc(t.icon || '') + '</div><h3>' + esc(t.title) + '</h3><p>' + esc(t.text || '') + '</p></div>').join('');
+    show($('themesSection'), themes.length > 0);
+
+    const aud = Array.isArray(L.audience) ? L.audience.filter(Boolean) : [];
+    $('audience').innerHTML = aud.map((a) => '<li>' + esc(a) + '</li>').join('');
+    show($('audienceSection'), aud.length > 0);
+
+    const tes = Array.isArray(L.testimonials) ? L.testimonials.filter((t) => t && t.text) : [];
+    $('testi').innerHTML = tes.map((t) =>
+      '<blockquote>“' + esc(t.text) + '”<cite>' + esc(t.by || '') + '</cite></blockquote>').join('');
+    show($('testiSection'), tes.length > 0);
+
+    $('hook').textContent = L.hook || '';
+    show($('hook'), !!L.hook);
+    $('stickyPrice').textContent = fmt(cfg.book.price);
+
+    if (L.whatsapp) {
+      $('waBtn').href = 'https://wa.me/' + encodeURIComponent(L.whatsapp) + '?text=' + encodeURIComponent(L.whatsappText || '');
+      show($('waBtn'), true);
+    }
 
     if (L.authorBio && L.author) {
       $('authorName').textContent = L.author;
@@ -637,6 +724,27 @@
       payBtn.textContent = 'Pagar con Flow';
     }
   });
+
+  $('shareBtn').addEventListener('click', async () => {
+    const data = { title: document.title, text: 'Mira este libro en preventa', url: location.href.split('#')[0] };
+    try {
+      if (navigator.share) { await navigator.share(data); }
+      else { await navigator.clipboard.writeText(data.url); $('shareBtn').textContent = '¡Link copiado!'; }
+    } catch (_) { /* cancelado */ }
+  });
+
+  // Barra de compra fija en móvil: aparece tras el hero y se oculta al llegar al formulario
+  (function () {
+    const bar = $('stickyCta'), hero = document.querySelector('.hero'), buy = $('comprar');
+    const check = () => {
+      const past = hero.getBoundingClientRect().bottom < 0;
+      const r = buy.getBoundingClientRect();
+      const atBuy = r.top < window.innerHeight * 0.6 && r.bottom > 0;
+      bar.classList.toggle('on', past && !atBuy);
+    };
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check);
+  })();
 
   loadConfig().catch(() => {
     $('errorMsg').textContent = 'No pudimos cargar la información. Recarga la página.';

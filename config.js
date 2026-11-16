@@ -16,15 +16,48 @@ module.exports = {
   // Textos de la página de venta. Todo es opcional: si dejas un campo
   // vacío, esa sección simplemente no se muestra.
   landing: {
-    subtitle: '',            // Ej: 'Una novela sobre ...' (una línea bajo el título)
-    author: '',              // Ej: 'Nombre Apellido'
-    badge: 'Preventa',       // Etiqueta sobre el título
-    cover: '',               // Ej: '/portada.jpg' (sube la imagen a /public). Vacío = portada tipográfica
-    synopsis: [],            // Lista de párrafos. Ej: ['Primer párrafo...', 'Segundo párrafo...']
-    quote: '',               // Frase destacada o reseña breve
-    quoteBy: '',             // Autor de la frase
-    authorBio: '',           // Breve bio del autor
-    deliveryNote: ''         // Ej: 'Fecha estimada de entrega: marzo 2027'
+    badge: 'Preventa',
+    subtitle: 'Una tragicomedia metafísica entre la ciencia, la filosofía y el amor.',
+    author: 'Gonzalo Cornejo Donoso',
+    cover: '', // Ej: '/portada.jpg' (sube la imagen a /public). Vacío = portada tipográfica
+
+    // Gancho corto que aparece justo antes de la compra
+    hook: '¿Y si el problema no fuera lo que ves, sino lo que quedó fuera de la muestra?',
+
+    synopsis: [
+      'Gonzalo nace el día en que Italia le gana a Brasil en el Mundial de España 82. Desde muy chico entiende que la belleza no siempre gana y que el mundo suele preferir lo que funciona.',
+      'Entre la infancia, el colegio, la familia, el trabajo y la ciudad, empieza a sospechar de las sombras: lo que no se ve, lo que no entra en la explicación oficial. Su manera de enfrentarlas es discutir con la materia.',
+      'Es una novela sobre vergüenza, amor, fracaso, salud mental, fe y ciencia, contada con humor y con una pregunta de fondo: qué pasa cuando una explicación brillante ocupa el lugar de la verdad.'
+    ],
+
+    quote: 'A veces el precio no baja porque el cliente sea racional.',
+    quoteBy: 'Un mensaje del libro',
+
+    // "Lo que vas a encontrar": se muestra como tarjetas
+    themes: [
+      { icon: '🌓', title: 'Luz y sombra', text: 'Una mirada distinta sobre lo que vemos y lo que se nos escapa.' },
+      { icon: '😅', title: 'Humor con fondo', text: 'Tragicomedia: te ríes, y de pronto te quedas pensando.' },
+      { icon: '🔬', title: 'Ciencia y fe', text: 'Preguntas grandes, contadas desde una vida concreta.' },
+      { icon: '❤️', title: 'Amor y fracaso', text: 'Infancia, vergüenza, salud mental y redención.' }
+    ],
+
+    // "Es para ti si..."
+    audience: [
+      'Te gustan las novelas contemporáneas con humor y preguntas grandes.',
+      'Trabajas con datos, tecnología o sistemas y sospechas que algo queda fuera de la muestra.',
+      'Creciste en los 80 y 90 en Chile y te gusta reconocer ese mundo en una historia.',
+      'Buscas un regalo distinto para alguien que disfruta pensar.'
+    ],
+
+    // Reseñas reales de lectores (déjalo vacío hasta tener; no inventar)
+    testimonials: [], // Ej: [{ text: 'Me hizo reír y pensar.', by: 'Nombre, Ciudad' }]
+
+    authorBio:
+      'Nació en Santiago de Chile en 1982. Es ingeniero civil industrial de la Pontificia Universidad Católica de Chile y ha trabajado en transporte, datos, pricing, procesos, innovación, tecnología e inteligencia artificial. Su mirada, entre sistemas, mercados y sombras, atraviesa esta novela.',
+
+    deliveryNote: '',        // Ej: 'Fecha estimada de entrega: marzo 2027'
+    whatsapp: '',            // Ej: '56912345678' (con código de país, sin + ni espacios)
+    whatsappText: 'Hola, tengo una consulta sobre la preventa del libro'
   },
 
   shipping: {
