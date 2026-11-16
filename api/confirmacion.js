@@ -31,7 +31,8 @@ module.exports = async (req, res) => {
             action: 'actualizar',
             orderId: status.commerceOrder,
             status: estado
-          })
+          }),
+          signal: AbortSignal.timeout(10000)
         });
       } catch (e) {
         console.error('No se pudo actualizar la planilla:', e.message);
