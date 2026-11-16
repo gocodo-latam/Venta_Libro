@@ -71,7 +71,10 @@ function procesar_(e) {
     const values = sheet.getDataRange().getValues();
     for (let i = 1; i < values.length; i++) {
       if (values[i][1] === orderId) {
-        sheet.getRange(i + 1, 13).setValue(status); // columna 13 = Estado
+        // Un pedido ya pagado nunca vuelve a rechazado/anulado/pendiente
+        if (values[i][12] !== 'pagado') {
+          sheet.getRange(i + 1, 13).setValue(status); // columna 13 = Estado
+        }
         break;
       }
     }

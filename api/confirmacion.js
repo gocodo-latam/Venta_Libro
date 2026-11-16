@@ -1,4 +1,5 @@
 const { flowRequest } = require('../lib/flow');
+const { actualizarEstado } = require('../lib/planilla');
 
 // Flow llama esta URL server-to-server después de un intento de pago.
 // Por seguridad NO confiamos en el cuerpo que envía Flow: usamos el
@@ -21,23 +22,7 @@ module.exports = async (req, res) => {
     else if (status.status === 3) estado = 'rechazado';
     else if (status.status === 4) estado = 'anulado';
 
-    if (process.env.SHEET_WEBAPP_URL) {
-      try {
-        await fetch(process.env.SHEET_WEBAPP_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({
-            token: process.env.SHEET_WEBAPP_TOKEN || '',
-            action: 'actualizar',
-            orderId: status.commerceOrder,
-            status: estado
-          }),
-          signal: AbortSignal.timeout(10000)
-        });
-      } catch (e) {
-        console.error('No se pudo actualizar la planilla:', e.message);
-      }
-    }
+    await actualizarEstado(status.commerceOrder, estado);
 
     // Flow solo espera un 200 OK, sin cuerpo específico.
     res.status(200).send('OK');
